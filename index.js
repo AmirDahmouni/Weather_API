@@ -9,6 +9,7 @@ require('dotenv').config();
 
 app.enable("trust proxy");
 app.use(cors({ origin: `http://localhost:3000`, credentials: true }));
+
 app.use(express.json()); // for parsing application/json we use it as middleware in pipeline return the req.body
 app.use(express.urlencoded({ extended: true }))
 
@@ -20,7 +21,9 @@ mongoose.connect(process.env.DATABASE_MONGOURL, {
   .then(() => console.log(`connected to ${process.env.DATABASE_MONGOURL}`))
   .catch(() => console.log(`failed coonection to ${process.env.DATABASE_MONGOURL}`));
 
-
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
 app.use("/user", userRoutes)
 app.use("/weather", weatherRoutes)
 app.use("/coordinations", coordinationsRoutes)
