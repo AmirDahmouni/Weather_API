@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const userRoutes = require("./routes/userRoutes")
-const weatherRoutes = require("./routes/weatherRoutes")
-const coordinationsRoutes = require("./routes/coordinatesRoutes")
+const userRoutes = require("../routes/userRoutes")
+const weatherRoutes = require("../routes/weatherRoutes")
+const coordinationsRoutes = require("../routes/coordinatesRoutes")
 require('dotenv').config();
 
 app.enable("trust proxy");
