@@ -28,7 +28,6 @@ app.use("/user", userRoutes)
 app.use("/weather", weatherRoutes)
 app.use("/coordinations", coordinationsRoutes)
 
-
-const server = app.listen(process.env.PORT, () => console.log(`listening on port ${process.env.PORT}...`));
+app.listen(process.env.PORT, () => console.log(`listening on port ${process.env.PORT}...`));
 
 module.exports = app;
