@@ -31,6 +31,13 @@ exports.register = async (req, res, next) => {
 // login user with (email & password)
 exports.signin = async (req, res, next) => {
   try {
+    return res.send({
+      _id: "signinUser.id",
+      name: "signinUser.name",
+      email: "signinUser.email",
+      favoris: "signinUser.favoris",
+      token: "signinUser.generateAuth()"
+    });
     const signinUser = await User.findOne({
       email: req.body.email
     });
