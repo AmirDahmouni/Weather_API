@@ -22,9 +22,6 @@ mongoose.connect(process.env.DATABASE_MONGOURL, {
   .catch(() => console.log(`failed coonection to ${process.env.DATABASE_MONGOURL}`));
 
 app.get('/', (req, res) => {
-  console.log(process.env.DATABASE_MONGOURL)
-  console.log(process.env.PORT)
-  console.log(process.env.WEATHER_APP)
   res.send('hello world')
 })
 app.use("/user", userRoutes)
