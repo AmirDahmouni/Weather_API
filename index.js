@@ -13,7 +13,7 @@ app.use(cors({ origin: process.env.WEATHER_APP, credentials: true }));
 app.use(express.json()); // for parsing application/json we use it as middleware in pipeline return the req.body
 app.use(express.urlencoded({ extended: true }))
 
-
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.DATABASE_MONGOURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
