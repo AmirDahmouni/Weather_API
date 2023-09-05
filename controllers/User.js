@@ -4,10 +4,10 @@ const bcrypt = require("bcrypt")
 exports.register = async (req, res, next) => {
   try {
     let user = await User.findOne({ email: req.body.email });
-    if (user) res.status(400).send({ message: 'invalid email' });
+    if (user) return res.status(400).send({ message: 'invalid email' });
 
     if (req.body.password !== req.body.repassword)
-      res.status(400).send({ message: "invalid rePassword " })
+      return res.status(400).send({ message: "invalid rePassword " })
     user = new User({
       username: req.body.username,
       email: req.body.email,
@@ -18,9 +18,9 @@ exports.register = async (req, res, next) => {
     const newUser = await user.save();
     //return newUser fields
     if (newUser)
-      res.status(201).send({ _id: newUser._id, username: newUser.name, email: newUser.email });
+      return res.status(201).send({ _id: newUser._id, username: newUser.name, email: newUser.email });
     else
-      res.status(401).send({ message: 'Invalid User Data' });
+      return res.status(401).send({ message: 'Invalid User Data' });
   }
   catch (ex) {
     next(ex.message)
