@@ -27,7 +27,7 @@ pipeline {
         sh "node -v"
         echo "building version ${NEW_VERSION}"
         script {
-          gv.buildApp
+          gv.buildApp()
         }
       }
     }
