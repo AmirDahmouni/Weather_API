@@ -19,7 +19,7 @@ pipeline {
     stage("init") {
       steps {
         script {
-
+          initialize()
         }
       }
     }
