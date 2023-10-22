@@ -2,7 +2,6 @@ pipeline {
   agent any
   environment {
     NEW_VERSION = '1.3.0'
-    BRANCH_NAME = env.BRANCH_NAME
   }
   stages {
 
@@ -23,7 +22,8 @@ pipeline {
         echo "running tests"
       }
     }
-     stage("deploy") {
+    stage("deploy") {
+      script {
       withCredentials ([
           usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
           usernamePassword(credentials: "Nexus", usernameVariable: USER_NEXUS, passwordVariable: PASSWORD_NEXUS),
@@ -36,6 +36,7 @@ pipeline {
          sh "docker push 12851043/weather_api_app:1.0"
          sh "docker push localhost:8082/weather_api_app:1.0"
       }
+     }
     }
   }
   post {
