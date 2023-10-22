@@ -51,8 +51,8 @@ pipeline {
           echo "deploying application version ${params.VERSION}... "
           sh "docker-buildx build -t 12851043/weather_api_app:1.0 ."
           sh "docker-buildx build -t localhost:8082/weather_api_app:1.0 ."
-          sh "echo ${PASSWORD_DOCKER} | docker login -u ${USER_DOCKER} -p --password-stdin"
-          sh "echo ${PASSWORD_NEXUS} | docker login -u ${USER_NEXUS} -p --password-stdin localhost:8082"
+          sh "echo $PASSWORD_DOCKER | docker login -u $USER_DOCKER --password-stdin"
+          sh "echo $PASSWORD_NEXUS | docker login -u $USER_NEXUS --password-stdin localhost:8082"
           sh "docker push 12851043/weather_api_app:1.0"
           sh "docker push localhost:8082/weather_api_app:1.0"
         }
