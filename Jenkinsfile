@@ -1,5 +1,7 @@
-def gv
+#!/usr/bin/env/ groovy
 
+@Library("jenkins-shared-library")
+def gv
 pipeline {
   agent any
   environment {
@@ -17,7 +19,7 @@ pipeline {
     stage("init") {
       steps {
         script {
-          gv = load "script.groovy"
+
         }
       }
     }
@@ -54,7 +56,7 @@ pipeline {
           echo "variable ${ENV}"
           echo "deploying application version ${params.VERSION}... "
           script {
-            gv.buildApp()
+            build()
           }
         }
       }
