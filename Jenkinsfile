@@ -38,8 +38,7 @@ pipeline {
       }
      }
     }
-  }
-  post {
+     post {
   always {
     echo "always start this action "
   }
@@ -50,5 +49,7 @@ pipeline {
     echo "failure !"
   }
 }
+  }
+
 }
 
