@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     NEW_VERSION = '1.3.0'
+    BRANCH_NAME = env.BRANCH_NAME
   }
   stages {
 
@@ -39,15 +40,14 @@ pipeline {
   }
   post {
   always {
-
+    echo "always start this action "
   }
   success {
+    echo "success !"
   }
   failure {
+    echo "failure !"
   }
 }
-}
-node {
-  //groovy script
 }
 
