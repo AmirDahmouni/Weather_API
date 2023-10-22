@@ -4,7 +4,7 @@ pipeline {
     NEW_VERSION = '1.3.0'
   }
   tools {
-    Nodejs 'node.js'
+    nodejs 'node'
   }
   parameters {
     string(name: 'VERSION', defaultValue: '', description: 'version deploy')
@@ -40,7 +40,7 @@ pipeline {
           usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
           usernamePassword(credentials: "Nexus", usernameVariable: USER_NEXUS, passwordVariable: PASSWORD_NEXUS),
         ]) {
-          echo "deploying application version ${VERSION}... "
+          echo "deploying application version ${params.VERSION}... "
           sh "docker-buildx build -t 12851043/weather_api_app:1.0 ."
           sh "docker-buildx build -t localhost:8082/weather_api_app:1.0 ."
           sh "docker login -u ${USER_DOCKER} -p ${PASSWORD_DOCKER}"
