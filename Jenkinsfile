@@ -50,7 +50,7 @@ pipeline {
       }
       steps {
         script {
-          build()
+          build("12851043/weather_api:1.2", "localhost:8082/weather_api:1.2")
         }
       }
     }
