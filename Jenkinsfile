@@ -2,7 +2,6 @@ pipeline {
   agent any
   environment {
     NEW_VERSION = '1.3.0'
-    BRANCH_NAME = env.BRANCH_NAME
   }
   stages {
     stage("build") {
