@@ -1,5 +1,7 @@
-def gv
+#!/usr/bin/env/ groovy
 
+@Library("jenkins-shared-library")
+def gv
 pipeline {
   agent any
   environment {
@@ -17,7 +19,7 @@ pipeline {
     stage("init") {
       steps {
         script {
-          gv = load "script.groovy"
+          initialize()
         }
       }
     }
@@ -47,15 +49,8 @@ pipeline {
         }
       }
       steps {
-        withCredentials([
-          usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'USER_DOCKER', passwordVariable: 'PASSWORD_DOCKER'),
-          usernamePassword(credentialsId: 'Nexus', usernameVariable: 'USER_NEXUS', passwordVariable: 'PASSWORD_NEXUS')
-        ]) {
-          echo "variable ${ENV}"
-          echo "deploying application version ${params.VERSION}... "
-          script {
-            gv.buildApp()
-          }
+        script {
+          build("12851043/weather_api:1.2", "localhost:8082/weather_api:1.2")
         }
       }
     }
