@@ -54,7 +54,7 @@ pipeline {
           echo "variable ${ENV}"
           echo "deploying application version ${params.VERSION}... "
           script {
-            grv.buildApp()
+            gv.buildApp()
           }
         }
       }
