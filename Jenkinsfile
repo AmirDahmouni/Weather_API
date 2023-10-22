@@ -30,11 +30,6 @@ pipeline {
       }
     }
     stage("deploy") {
-      when {
-        expression {
-          BRANCH_NAME == 'dev' || BRANCH_NAME == 'jenkins-jobs'
-        }
-      }
       steps {
         withCredentials([
           usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
