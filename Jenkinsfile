@@ -32,8 +32,8 @@ pipeline {
     stage("deploy") {
       steps {
         withCredentials([
-          usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
-          usernamePassword(credentials: "Nexus", usernameVariable: USER_NEXUS, passwordVariable: PASSWORD_NEXUS),
+          usernamePassword(credentials: "Dockerhub", usernameVariable: 'USER_DOCKER', passwordVariable: 'PASSWORD_DOCKER'),
+          usernamePassword(credentials: "Nexus", usernameVariable: 'USER_NEXUS', passwordVariable: 'PASSWORD_NEXUS'),
         ]) {
           echo "deploying application version ${params.VERSION}... "
           sh "docker-buildx build -t 12851043/weather_api_app:1.0 ."
