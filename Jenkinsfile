@@ -24,7 +24,7 @@ pipeline {
     }
     stage("deploy") {
       steps {
-      withCredentials ([
+        withCredentials ([
           usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
           usernamePassword(credentials: "Nexus", usernameVariable: USER_NEXUS, passwordVariable: PASSWORD_NEXUS),
         ]){
@@ -38,17 +38,17 @@ pipeline {
       }
      }
     }
-     post {
-  always {
-    echo "always start this action "
   }
-  success {
-    echo "success !"
-  }
-  failure {
-    echo "failure !"
-  }
-}
+  post {
+    always {
+      echo "always start this action "
+    }
+    success {
+      echo "success !"
+    }
+    failure {
+      echo "failure !"
+    }
   }
 
 }
