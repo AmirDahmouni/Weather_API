@@ -3,6 +3,14 @@ pipeline {
   environment {
     NEW_VERSION = '1.3.0'
   }
+  tools {
+    Nodejs 'node.js'
+  }
+  parameters {
+    string(name: 'VERSION', defaultValue: '', description: 'version deploy')
+    choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+    booleanParam(name: 'executeTests', defaultValue: true, description :'test')
+  }
   stages {
     stage("build") {
       steps {
@@ -12,6 +20,11 @@ pipeline {
       }
     }
     stage("test") {
+      when {
+        expression {
+          params.executeTests == true
+        }
+      }
       steps {
         echo "running tests"
       }
@@ -27,7 +40,7 @@ pipeline {
           usernamePassword(credentials: "Dockerhub", usernameVariable: USER_DOCKER, passwordVariable: PASSWORD_DOCKER),
           usernamePassword(credentials: "Nexus", usernameVariable: USER_NEXUS, passwordVariable: PASSWORD_NEXUS),
         ]) {
-          echo "deploying application ... "
+          echo "deploying application version ${VERSION}... "
           sh "docker-buildx build -t 12851043/weather_api_app:1.0 ."
           sh "docker-buildx build -t localhost:8082/weather_api_app:1.0 ."
           sh "docker login -u ${USER_DOCKER} -p ${PASSWORD_DOCKER}"
