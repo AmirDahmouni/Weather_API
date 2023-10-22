@@ -32,7 +32,7 @@ pipeline {
     stage("deploy") {
       when {
         expression {
-          BRANCH_NAME == 'dev' || BRANCH_NAME == 'master'
+          BRANCH_NAME == 'dev' || BRANCH_NAME == 'jenkins-jobs'
         }
       }
       steps {
