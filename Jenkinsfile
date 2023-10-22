@@ -26,9 +26,6 @@ pipeline {
         echo "testing node version"
         sh "node -v"
         echo "building version ${NEW_VERSION}"
-        script {
-          gv.buildApp()
-        }
       }
     }
     stage("test") {
@@ -42,19 +39,23 @@ pipeline {
       }
     }
     stage("deploy") {
+      input {
+        message "Select the environment to deploy to"
+        ok "Done"
+        parameters {
+          choice(name: 'ENV', choices: ['Dev', 'Staging', 'Production'], description: '')
+        }
+      }
       steps {
         withCredentials([
           usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'USER_DOCKER', passwordVariable: 'PASSWORD_DOCKER'),
           usernamePassword(credentialsId: 'Nexus', usernameVariable: 'USER_NEXUS', passwordVariable: 'PASSWORD_NEXUS')
         ]) {
-          echo "variable ${USER_DOCKER}"
+          echo "variable ${ENV}"
           echo "deploying application version ${params.VERSION}... "
-          sh "docker-buildx build -t 12851043/weather_api_app:1.0 ."
-          sh "docker-buildx build -t localhost:8082/weather_api_app:1.0 ."
-          sh "echo $PASSWORD_DOCKER | docker login -u $USER_DOCKER --password-stdin"
-          sh "echo $PASSWORD_NEXUS | docker login -u $USER_NEXUS --password-stdin localhost:8082"
-          sh "docker push 12851043/weather_api_app:1.0"
-          sh "docker push localhost:8082/weather_api_app:1.0"
+          script {
+            grv.buildApp()
+          }
         }
       }
     }
