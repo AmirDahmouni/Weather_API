@@ -49,15 +49,8 @@ pipeline {
         }
       }
       steps {
-        withCredentials([
-          usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'USER_DOCKER', passwordVariable: 'PASSWORD_DOCKER'),
-          usernamePassword(credentialsId: 'Nexus', usernameVariable: 'USER_NEXUS', passwordVariable: 'PASSWORD_NEXUS')
-        ]) {
-          echo "variable ${ENV}"
-          echo "deploying application version ${params.VERSION}... "
-          script {
-            build()
-          }
+        script {
+          build()
         }
       }
     }
