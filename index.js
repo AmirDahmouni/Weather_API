@@ -19,7 +19,7 @@ mongoose.connect(process.env.DATABASE_MONGOURL, {
   useUnifiedTopology: true,
 })
   .then(() => console.log(`connected to ${process.env.DATABASE_MONGOURL}`))
-  .catch(() => console.log(`failed connection to ${process.env.DATABASE_MONGOURL}`));
+  .catch(() => console.log(`failed connection to ${process.env.DATABASE_MONGOURL} !`));
 
 app.get('/', (req, res) => {
   res.send('hello world')
