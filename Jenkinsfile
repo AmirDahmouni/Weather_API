@@ -42,10 +42,9 @@ pipeline {
           echo "testing node version"
           sh "node -v"
           sh 'npm version patch'
-
-          sh "npm pack ${NAME_PROJECT}:${NEXT_VERSION}"
+          sh 'rm weather_api*'
+          sh "npm pack"
           echo "building version ${nextVersion}"
-
         }
 
       }
