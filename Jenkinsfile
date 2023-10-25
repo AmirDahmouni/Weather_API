@@ -25,14 +25,17 @@ pipeline {
     }
     stage("build") {
       steps {
-        echo "testing node version"
-        sh "node -v"
-        sh "npm update-patch"
+        script {
 
-        def packageJson = readJSON file: './package.json'
-        def NEXT_VERSION = json.version
+          echo "testing node version"
+          sh "node -v"
 
-        echo "building version ${NEXT_VERSION}"
+          def nextVersion = sh(script: 'npm version patch', returnStatus: true).trim()
+
+          echo "building version ${nextVersion}"
+
+        }
+
       }
     }
     stage("test") {
