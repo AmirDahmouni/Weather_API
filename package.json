@@ -1,6 +1,6 @@
 {
   "name": "weather-app",
-  "version": "1.0.0",
+  "version": "3.2.1",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -9,9 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "update-major": "node scripts/update-major.js",
-    "update-minor": "node scripts/update-minor.js",
-    "update-patch": "node scripts/update-patch.js"
+    "update-major": "node ./scripts/release-major.js",
+    "update-minor": "node ./scripts/release-minor.js",
+    "update-patch": "node ./scripts/release-patch.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
     "nodemon": "^3.0.1",
+    "path": "^0.12.7",
     "process-env": "^2.0.2"
   }
 }

@@ -27,7 +27,14 @@ pipeline {
       steps {
         echo "testing node version"
         sh "node -v"
-        echo "building version ${NEW_VERSION}"
+        sh "npm update-patch"
+
+        def packageJson = readFile('package.json')
+        def jsonSlurper = new JsonSlurperClassic()
+        def json = jsonSlurper.parseText(packageJson)
+        def NEXT_VERSION = json.version
+
+        echo "building version ${NEXT_VERSION}"
       }
     }
     stage("test") {
