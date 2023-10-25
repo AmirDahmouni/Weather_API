@@ -8,10 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
-    "update-major": "node ./scripts/release-major.js",
-    "update-minor": "node ./scripts/release-minor.js",
-    "update-patch": "node ./scripts/release-patch.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

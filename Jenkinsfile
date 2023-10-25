@@ -5,14 +5,16 @@ def gv
 pipeline {
   agent any
   environment {
-    NEW_VERSION = '1.3.0'
+    NAME_PROJECT = 'Weather_api'
+    HOST_DOCKER = "12851043"
+    HOST_NEXUS = "localhost:8082"
   }
   tools {
     nodejs 'node'
   }
   parameters {
     string(name: 'VERSION', defaultValue: '', description: 'version deploy')
-    choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+    choice(name: 'VERSION', choices: ['Major', 'Minor', 'Patch'], description: '')
     booleanParam(name: 'executeTests', defaultValue: true, description :'test')
   }
   stages {
@@ -31,7 +33,7 @@ pipeline {
           sh "node -v"
 
           def nextVersion = sh(script: 'npm version patch', returnStatus: true)
-
+          env.NEXT_VERSION = nextVersion
           echo "building version ${nextVersion}"
 
         }
@@ -58,7 +60,8 @@ pipeline {
       }
       steps {
         script {
-          build("12851043/weather_api:1.2", "localhost:8082/weather_api:1.2")
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}")
         }
       }
     }
