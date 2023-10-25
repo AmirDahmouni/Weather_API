@@ -42,16 +42,7 @@ pipeline {
           echo "testing node version"
           sh "node -v"
 
-          def versionOutput = sh(script: 'npm version patch', returnStatus: true)
-
-          // Extract major, minor, and patch versions
-          def majorMinorPatch = versionOutput.tokenize('.')
-          def major = majorMinorPatch[0]
-          def minor = majorMinorPatch[1]
-          def patch = majorMinorPatch[2]
-
-          // Add the patch version to major and minor
-          def nextVersion = "${major}.${minor}.${patch}"
+          def nextVersion = sh(script: 'npm version patch | cut -d "." -f 1,2,3', returnStatus: true)
 
           env.NEXT_VERSION = nextVersion
 
