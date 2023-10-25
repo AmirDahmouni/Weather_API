@@ -30,7 +30,7 @@ pipeline {
           echo "testing node version"
           sh "node -v"
 
-          def nextVersion = sh(script: 'npm version patch', returnStatus: true).trim()
+          def nextVersion = sh(script: 'npm version patch', returnStatus: true)
 
           echo "building version ${nextVersion}"
 
