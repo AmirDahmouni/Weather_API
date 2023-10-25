@@ -42,9 +42,16 @@ pipeline {
           echo "testing node version"
           sh "node -v"
 
-          def nextVersion = sh(script: 'npm version patch | cut -d "." -f 1,2,3', returnStatus: true)
+          def versionOutput = sh(script: 'npm version patch', returnStatus: true).trim()
 
-          env.NEXT_VERSION = nextVersion
+          // Split the version string by the period (.) and remove the "v" prefix
+          def versionParts = versionOutput.replaceAll(/^v/, "").split('\\.')
+
+          def major = versionParts[0]
+          def minor = versionParts[1]
+          def patch = versionParts[2]
+
+          env.NEXT_VERSION = "${major}.${minor}.${patch}"
 
           sh "npm pack ${NAME_PROJECT}:${NEXT_VERSION}"
           echo "building version ${nextVersion}"
