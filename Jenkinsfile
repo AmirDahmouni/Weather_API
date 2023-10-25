@@ -38,6 +38,8 @@ pipeline {
     stage("build") {
       steps {
         script {
+          sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
+          sh 'git config --global user.name "AmirDahmouni"'
 
           echo "testing node version"
           sh "node -v"
@@ -61,6 +63,23 @@ pipeline {
         script {
           buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
           buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
+        }
+      }
+    }
+    stage("commit version update") {
+      steps {
+        script {
+          withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
+            sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
+            sh 'git config --global user.name "AmirDahmouni"'
+            sh 'git config '
+            sh 'git status'
+            sh 'git branch'
+            sh 'git config --list'
+            sh "git remote set-url origin https://${USER}:${PASS}@github.com/AmirDahmouni/Weather_API.git"
+            sh 'git add .'
+            sh 'git commit -m "ci: Next version " '
+            sh 'git push origin HEAD:master'
         }
       }
     }
