@@ -43,10 +43,10 @@ pipeline {
 
           echo "testing node version"
           sh "node -v"
-          def nextVersion = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
+          def NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
           sh 'rm -f weather_api*'
           sh "npm pack"
-          echo "building version ${nextVersion}"
+          echo "building version ${NEXT_VERSION}"
         }
 
       }
