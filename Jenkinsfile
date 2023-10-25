@@ -41,7 +41,7 @@ pipeline {
 
           echo "testing node version"
           sh "node -v"
-          sh 'npm version patch'
+          sh 'git add . && npm version patch'
           sh 'rm weather_api*'
           sh "npm pack"
           echo "building version ${nextVersion}"
