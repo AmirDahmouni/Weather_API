@@ -25,6 +25,16 @@ pipeline {
         }
       }
     }
+    stage("test") {
+      when {
+        expression {
+          params.executeTests == true
+        }
+      }
+      steps {
+        echo "running tests"
+      }
+    }
     stage("build") {
       steps {
         script {
@@ -40,16 +50,6 @@ pipeline {
 
         }
 
-      }
-    }
-    stage("test") {
-      when {
-        expression {
-          params.executeTests == true
-        }
-      }
-      steps {
-        echo "running tests"
       }
     }
     stage("deploy") {
