@@ -29,9 +29,7 @@ pipeline {
         sh "node -v"
         sh "npm update-patch"
 
-        def packageJson = readFile('package.json')
-        def jsonSlurper = new JsonSlurperClassic()
-        def json = jsonSlurper.parseText(packageJson)
+        def packageJson = readJSON file: './package.json'
         def NEXT_VERSION = json.version
 
         echo "building version ${NEXT_VERSION}"
