@@ -1,6 +1,6 @@
 {
-  "name": "weather-app",
-  "version": "1.0.0",
+  "name": "weather_api",
+  "version": "4.0.4",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
     "nodemon": "^3.0.1",
+    "path": "^0.12.7",
     "process-env": "^2.0.2"
   }
 }
