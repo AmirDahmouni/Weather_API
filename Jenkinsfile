@@ -44,7 +44,7 @@ pipeline {
           echo "testing node version"
           sh "node -v"
           sh 'npm version patch --no-git-tag-version'
-          sh 'rm weather_api*'
+          sh 'rm -f weather_api*'
           sh "npm pack"
           echo "building version ${nextVersion}"
         }
@@ -76,7 +76,7 @@ pipeline {
             sh 'git status'
             sh 'git branch'
             sh 'git config --list'
-            sh "git remote set-url origin https://${USER}:${PASS}@github.com/AmirDahmouni/Weather_API.git"
+            sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/AmirDahmouni/Weather_API.git"
             sh 'git add .'
             sh 'git commit -m "ci: Next version " '
             sh 'git push origin HEAD:master'
