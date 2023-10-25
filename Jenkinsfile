@@ -34,6 +34,8 @@ pipeline {
 
           def nextVersion = sh(script: 'npm version patch', returnStatus: true)
           env.NEXT_VERSION = nextVersion
+          sh "rm ^${NAME_PROJECT}*"
+          sh "npm pack ${NAME_PROJECT}:${NEXT_VERSION}"
           echo "building version ${nextVersion}"
 
         }
@@ -61,7 +63,7 @@ pipeline {
       steps {
         script {
           buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
-          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}")
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
         }
       }
     }

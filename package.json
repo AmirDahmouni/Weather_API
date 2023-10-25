@@ -1,5 +1,5 @@
 {
-  "name": "weather-app",
+  "name": "weather_api",
   "version": "4.0.0",
   "description": "",
   "main": "index.js",
