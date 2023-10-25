@@ -43,9 +43,6 @@ pipeline {
           sh "node -v"
           sh 'npm version patch'
 
-          def packageJson = readJSON file: 'package.json'
-          def NEXT_VERSION = packageJSON.version
-
           sh "npm pack ${NAME_PROJECT}:${NEXT_VERSION}"
           echo "building version ${nextVersion}"
 
