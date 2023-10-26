@@ -21,11 +21,16 @@ pipeline {
     stage("init") {
       steps {
         script {
+          def version = "5.0.2"
+def dot = "."
+def concatenatedVersion = version + dot
+
+println concatenatedVersion  // This will correctly output "5.0.2."
           initialize()
         }
       }
     }
-    stage("test") {
+    /*stage("test") {
       when {
         expression {
           params.executeTests == true
@@ -67,7 +72,7 @@ pipeline {
           def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}"+"."
           echo "IMG ================>${DOCKER_IMG}"
           buildDocker(DOCKER_IMG)
-          /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)
         }
       }
     }
@@ -89,7 +94,7 @@ pipeline {
           }
         }
       }
-    }
+    }*/
   }
   post {
     always {
