@@ -2,12 +2,14 @@
 
 @Library("jenkins-shared-library")
 def gv
+def NAME_PROJECT = 'weather_api'
+def HOST_DOCKER = "12851043"
+def HOST_NEXUS = "localhost:8082"
+
 pipeline {
   agent any
   environment {
-    NAME_PROJECT = 'weather_api'
-    HOST_DOCKER = "12851043"
-    HOST_NEXUS = "localhost:8082"
+
   }
   tools {
     nodejs 'node'
@@ -51,7 +53,7 @@ pipeline {
           sh 'git config --global user.email "dahmouni_amir@hotmail.fr" '
           sh 'git config --global user.name "AmirDahmouni" '
 
-          NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
+          def NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
           sh 'rm -f weather_api*'
           sh "npm pack"
           echo "building version ${NEXT_VERSION}"
