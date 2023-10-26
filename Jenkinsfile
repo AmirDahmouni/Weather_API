@@ -64,8 +64,7 @@ pipeline {
       }
       steps {
         script {
-          echo "${NEXT_VERSION}"
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:v5.0.4")
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
         }
       }
