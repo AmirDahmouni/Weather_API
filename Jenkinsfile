@@ -79,6 +79,12 @@ pipeline {
             sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/AmirDahmouni/Weather_API.git"
             sh 'git add .'
             sh 'git commit -m "ci: Next version" '
+
+            sh 'git stash save "Stash package.json changes"'
+            sh 'git pull origin master'
+            sh 'git stash apply'
+            sh 'git stash drop'
+
             sh 'git push origin HEAD:master'
           }
         }
