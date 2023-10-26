@@ -65,8 +65,8 @@ pipeline {
       steps {
         script {
           def releaseVersion = NEXT_VERSION.replaceAll("\\.", "").replace("v", "v")
-
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}",NEXT_VERSION)
+          def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}"
+          buildDocker(DOCKER_IMG)
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
         }
       }
