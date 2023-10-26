@@ -5,6 +5,7 @@ def gv
 def NAME_PROJECT = 'weather_api'
 def HOST_DOCKER = "12851043"
 def HOST_NEXUS = "localhost:8082"
+def NEXT_VERSION ="5.0.10"
 
 pipeline {
   agent any
