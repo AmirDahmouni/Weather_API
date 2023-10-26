@@ -56,7 +56,7 @@ pipeline {
     }
     stage("deploy") {
       input {
-        message "Select the environment to deploy to"
+        message "Select the deploiement environment "
         ok "Done"
         parameters {
           choice(name: 'ENV', choices: ['Dev', 'Staging', 'Production'], description: '')
@@ -64,8 +64,8 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
-          /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz .")*/
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}${NEXT_VERSION}")
+          /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
         }
       }
     }
