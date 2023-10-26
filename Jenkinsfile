@@ -30,10 +30,6 @@ pipeline {
 
           echo concatenatedVersion  // This will correctly output "5.0.2."
 
-
-          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSIONN +'.'
-          echo DOCKER_IMG
-
           initialize()
         }
       }
@@ -79,7 +75,8 @@ pipeline {
       }
       steps {
         script {
-          echo "he"
+          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + ' .'
+          echo DOCKER_IMG
           //buildDocker(DOCKER_IMG)
           //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
         }
