@@ -2,14 +2,14 @@
 
 @Library("jenkins-shared-library")
 
-def NAME_PROJECT = "weather_api"
-def HOST_DOCKER = "12851043"
-def HOST_NEXUS = "localhost:8082"
+
 
 pipeline {
   agent any
   environment {
-      EXEMPLE="EXEMPLE"
+      NAME_PROJECT = "weather_api"
+      HOST_DOCKER = "12851043"
+      HOST_NEXUS = "localhost:8082"
   }
   tools {
     nodejs 'node'
@@ -23,11 +23,6 @@ pipeline {
     stage("init") {
       steps {
         script {
-          def version = "5.0.2"
-          def dot = " ."
-          def concatenatedVersion = version + dot
-
-          echo concatenatedVersion  // This will correctly output "5.0.2."
 
           initialize()
         }
