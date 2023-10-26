@@ -64,7 +64,7 @@ pipeline {
       }
       steps {
         script {
-          def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION} ." as String
+          def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}"+"."
           echo "IMG ================>${DOCKER_IMG}"
           buildDocker(DOCKER_IMG)
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
