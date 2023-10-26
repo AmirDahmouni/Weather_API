@@ -43,6 +43,9 @@ pipeline {
 
           echo "testing node version"
           sh "node -v"
+          sh 'git config --global user.email "dahmouni_amir@hotmail.fr" '
+          sh 'git config --global user.name "AmirDahmouni" '
+
           NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
           sh 'rm -f weather_api*'
           sh "npm pack"
