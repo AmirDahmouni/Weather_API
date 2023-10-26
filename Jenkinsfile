@@ -5,7 +5,7 @@ def gv
 def NAME_PROJECT = 'weather_api'
 def HOST_DOCKER = "12851043"
 def HOST_NEXUS = "localhost:8082"
-def NEXT_VERSIONN ="5.0.10"
+def NEXT_VERSION
 
 pipeline {
   agent any
@@ -75,7 +75,7 @@ pipeline {
       }
       steps {
         script {
-          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + ' .'
+          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.'
           echo DOCKER_IMG
           //buildDocker(DOCKER_IMG)
           //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
