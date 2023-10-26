@@ -5,7 +5,7 @@ def gv
 pipeline {
   agent any
   environment {
-    NAME_PROJECT = 'Weather_api'
+    NAME_PROJECT = 'weather_api'
     HOST_DOCKER = "12851043"
     HOST_NEXUS = "localhost:8082"
   }
@@ -61,7 +61,7 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
+          /*buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")*/
           buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
         }
       }
@@ -78,7 +78,7 @@ pipeline {
             sh 'git config --list'
             sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/AmirDahmouni/Weather_API.git"
             sh 'git add .'
-            sh 'git commit -m "ci: Next version " '
+            sh 'git commit -m "ci: Next version" '
             sh 'git push origin HEAD:master'
         }
       }
