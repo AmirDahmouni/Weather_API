@@ -82,8 +82,6 @@ pipeline {
 
             sh 'git stash save "Stash package.json changes"'
             sh 'git pull origin master'
-            sh 'git stash apply'
-            sh 'git stash drop'
 
             sh 'git push origin HEAD:master'
           }
