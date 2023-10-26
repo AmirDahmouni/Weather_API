@@ -76,7 +76,6 @@ pipeline {
           {
             sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
             sh 'git config --global user.name "AmirDahmouni"'
-            sh 'git config '
             sh 'git status'
             sh 'git branch'
             sh 'git config --list'
