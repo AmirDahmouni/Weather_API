@@ -22,15 +22,15 @@ pipeline {
       steps {
         script {
           def version = "5.0.2"
-def dot = "."
-def concatenatedVersion = version + dot
+          def dot = " ."
+          def concatenatedVersion = version + dot
 
-println concatenatedVersion  // This will correctly output "5.0.2."
+          println concatenatedVersion  // This will correctly output "5.0.2."
           initialize()
         }
       }
     }
-    /*stage("test") {
+    stage("test") {
       when {
         expression {
           params.executeTests == true
@@ -55,6 +55,9 @@ println concatenatedVersion  // This will correctly output "5.0.2."
           sh 'rm -f weather_api*'
           sh "npm pack"
           echo "building version ${NEXT_VERSION}"
+
+          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSION +'.'
+          echo "IMG ================>${DOCKER_IMG}"
         }
 
       }
@@ -69,10 +72,9 @@ println concatenatedVersion  // This will correctly output "5.0.2."
       }
       steps {
         script {
-          def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}"+"."
-          echo "IMG ================>${DOCKER_IMG}"
-          buildDocker(DOCKER_IMG)
-          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)
+
+          //buildDocker(DOCKER_IMG)
+          //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
         }
       }
     }
@@ -94,7 +96,7 @@ println concatenatedVersion  // This will correctly output "5.0.2."
           }
         }
       }
-    }*/
+    }
   }
   post {
     always {
