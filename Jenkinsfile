@@ -27,7 +27,12 @@ pipeline {
           def dot = " ."
           def concatenatedVersion = version + dot
 
-          println concatenatedVersion  // This will correctly output "5.0.2."
+          echo concatenatedVersion  // This will correctly output "5.0.2."
+
+
+          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSION +'.'
+          echo DOCKER_IMG
+
           initialize()
         }
       }
@@ -58,8 +63,7 @@ pipeline {
           sh "npm pack"
           echo "building version ${NEXT_VERSION}"
 
-          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSION +'.'+''
-          echo "IMG ================>${DOCKER_IMG}"
+
         }
 
       }
