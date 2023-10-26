@@ -76,9 +76,6 @@ pipeline {
           {
             sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
             sh 'git config --global user.name "AmirDahmouni"'
-            sh 'git status'
-            sh 'git branch'
-            sh 'git config --list'
             sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/AmirDahmouni/Weather_API.git"
             sh 'git add .'
             sh 'git commit -m "ci: Next version" '
