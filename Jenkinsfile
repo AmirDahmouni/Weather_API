@@ -46,7 +46,7 @@ pipeline {
           sh 'git config --global user.email "dahmouni_amir@hotmail.fr" '
           sh 'git config --global user.name "AmirDahmouni" '
 
-          def NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
+          NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
           sh 'rm -f weather_api*'
           sh "npm pack"
           echo "building version ${NEXT_VERSION}"
@@ -66,6 +66,7 @@ pipeline {
         script {
           def releaseVersion = NEXT_VERSION.replaceAll("\\.", "").replace("v", "v")
           def DOCKER_IMG="${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}"
+          echo $DOCKER_IMG
           buildDocker(DOCKER_IMG)
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz)*/
         }
