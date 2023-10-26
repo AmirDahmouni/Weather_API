@@ -72,7 +72,7 @@ pipeline {
       }
       steps {
         script {
-
+          echo "he"
           //buildDocker(DOCKER_IMG)
           //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
         }
