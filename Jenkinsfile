@@ -75,8 +75,8 @@ pipeline {
       }
       steps {
         script {
-
-          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.'
+          def BLANK = ''
+          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.' + BLANK
           echo DOCKER_IMG
           //buildDocker(DOCKER_IMG)
           //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
