@@ -64,7 +64,7 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${NEXT_VERSION}")
+          buildDocker("${NAME_PROJECT}:${NEXT_VERSION}")
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz .")*/
         }
       }
