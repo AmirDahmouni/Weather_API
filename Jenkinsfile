@@ -2,10 +2,10 @@
 
 @Library("jenkins-shared-library")
 def gv
-def NAME_PROJECT = 'weather_api'
+def NAME_PROJECT = "weather_api"
 def HOST_DOCKER = "12851043"
 def HOST_NEXUS = "localhost:8082"
-def NEXT_VERSION
+def NEXT_VERSION = ""
 
 pipeline {
   agent any
@@ -75,7 +75,7 @@ pipeline {
       }
       steps {
         script {
-          def NEXT_VERSION = "1.2.3"
+
           def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.'
           echo DOCKER_IMG
           //buildDocker(DOCKER_IMG)
