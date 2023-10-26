@@ -56,7 +56,7 @@ pipeline {
           sh "npm pack"
           echo "building version ${NEXT_VERSION}"
 
-          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSION +'.'
+          def DOCKER_IMG= HOST_DOCKER + NAME_PROJECT +':'+ NEXT_VERSION +'.'+''
           echo "IMG ================>${DOCKER_IMG}"
         }
 
