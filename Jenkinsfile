@@ -9,7 +9,7 @@ def HOST_NEXUS = "localhost:8082"
 pipeline {
   agent any
   environment {
-
+      EXEMPLE="EXEMPLE"
   }
   tools {
     nodejs 'node'
