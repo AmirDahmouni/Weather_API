@@ -73,6 +73,7 @@ pipeline {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
+          {
             sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
             sh 'git config --global user.name "AmirDahmouni"'
             sh 'git config '
@@ -83,6 +84,7 @@ pipeline {
             sh 'git add .'
             sh 'git commit -m "ci: Next version" '
             sh 'git push origin HEAD:master'
+          }
         }
       }
     }
