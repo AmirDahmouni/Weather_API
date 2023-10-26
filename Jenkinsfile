@@ -64,7 +64,7 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${NAME_PROJECT}:${NEXT_VERSION}")
+          buildDocker("weather_api:v5.0.1")
           /*buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz .")*/
         }
       }
