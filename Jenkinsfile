@@ -1,11 +1,10 @@
 #!/usr/bin/env/ groovy
 
 @Library("jenkins-shared-library")
-def gv
+
 def NAME_PROJECT = "weather_api"
 def HOST_DOCKER = "12851043"
 def HOST_NEXUS = "localhost:8082"
-def NEXT_VERSION = ""
 
 pipeline {
   agent any
@@ -75,11 +74,8 @@ pipeline {
       }
       steps {
         script {
-          def BLANK = ''
-          def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.' + BLANK
-          echo DOCKER_IMG
-          //buildDocker(DOCKER_IMG)
-          //buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${NEXT_VERSION}.tgz")
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:v5.0.10")
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:v5.0.10.tgz")
         }
       }
     }
