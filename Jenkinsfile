@@ -75,6 +75,7 @@ pipeline {
       }
       steps {
         script {
+          def NEXT_VERSION = "1.2.3"
           def DOCKER_IMG = HOST_DOCKER + '/' + NAME_PROJECT +':'+ NEXT_VERSION + '.'
           echo DOCKER_IMG
           //buildDocker(DOCKER_IMG)
