@@ -8,6 +8,7 @@ pipeline {
       NAME_PROJECT = "weather_api"
       HOST_DOCKER = "12851043"
       HOST_NEXUS = "localhost:8082"
+      TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStatus: true).trim()
   }
   tools {
     nodejs 'node'
@@ -81,7 +82,7 @@ pipeline {
             sh 'git config --global user.name "AmirDahmouni"'
             sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/AmirDahmouni/Weather_API.git"
             sh 'git add .'
-            sh 'git commit -m "ci: Next version" '
+            sh 'git commit -m "CI: update version" '
 
             sh 'git stash save "Stash package.json changes"'
             sh 'git pull origin master'
