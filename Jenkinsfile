@@ -19,25 +19,24 @@ pipeline {
     booleanParam(name: 'executeTests', defaultValue: true, description :'test')
   }
   stages {
-    stage("init") {
+    /*stage("Initialize Build") {
       steps {
         script {
-
           initialize()
         }
       }
     }
-    stage("test") {
+    stage("Tests") {
       when {
         expression {
           params.executeTests == true
         }
       }
       steps {
-        echo "running tests"
+        echo "running tests ..."
       }
-    }
-    stage("build") {
+    }*/
+    /*stage("build App") {
       steps {
         script {
           sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
@@ -57,8 +56,8 @@ pipeline {
         }
 
       }
-    }
-    stage("deploy") {
+    }*/
+    /*stage("Build & Push Image") {
       input {
         message "Select the deploiement environment "
         ok "Done"
@@ -68,12 +67,22 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:v5.0.10")
-          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:v5.0.10.tgz")
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:5.0.10")
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:5.0.10.tgz")
+        }
+      }
+    }*/
+    stage ("Deploy ...") {
+      steps {
+        script {
+          def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
+          sshagent(['EC2-server']) {
+             sh "ssh -o StrictHostKeyChecking=no amazon@192.168.1.74 ${dockerCMD}"
+          }
         }
       }
     }
-    stage("commit version update") {
+    /*stage("commit version update") {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
@@ -91,7 +100,7 @@ pipeline {
           }
         }
       }
-    }
+    }*/
   }
   post {
     always {
