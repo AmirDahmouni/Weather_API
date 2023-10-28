@@ -77,6 +77,7 @@ pipeline {
         script {
           def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
           sshagent(['EC2-server']) {
+            sh "ping 192.168.1.74"
              sh "ssh -o StrictHostKeyChecking=no amazon@192.168.1.74 ${dockerCMD}"
           }
         }
