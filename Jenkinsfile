@@ -2,6 +2,13 @@
 
 @Library("jenkins-shared-library")
 def gv
+library identifier :'jenkins-shared-library@master',retriever: modernSCM(
+  [$class: 'GitSCMSource',
+   remote : 'https://github.com/AmirDahmouni/Weather_API.git',
+   credentialsId: 'github-credentials'
+  ]
+)
+
 pipeline {
   agent any
   environment {
@@ -19,7 +26,7 @@ pipeline {
     booleanParam(name: 'executeTests', defaultValue: true, description :'test')
   }
   stages {
-    /*stage("Initialize Build") {
+    stage("Initialize Build") {
       steps {
         script {
           initialize()
@@ -35,8 +42,8 @@ pipeline {
       steps {
         echo "running tests ..."
       }
-    }*/
-    /*stage("build App") {
+    }
+    stage("build App") {
       steps {
         script {
           sh 'git config --global user.email "dahmouni_amir@hotmail.fr"'
@@ -56,8 +63,8 @@ pipeline {
         }
 
       }
-    }*/
-    /*stage("Build & Push Image") {
+    }
+    stage("Build & Push Image") {
       input {
         message "Select the deploiement environment "
         ok "Done"
@@ -71,18 +78,21 @@ pipeline {
           buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:5.0.10.tgz")
         }
       }
-    }*/
+    }
     stage ("Deploy ...") {
       steps {
         script {
-          def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
+          echo "deploying docker image to EC2 ..."
+          def dockerComposeCmd = "docker-compose -f docker-compose.yaml up --detach"
+          //def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
           sshagent(['EC2-server']) {
-             sh "ssh -o StrictHostKeyChecking=no amazon@192.168.1.74 ${dockerCMD}"
+             sh 'scp docker-compose.yaml amazon@192.168.1.74:/home/amazon'
+             sh "ssh -o StrictHostKeyChecking=no amazon@192.168.1.74 ${dockerComposeCmd}"
           }
         }
       }
     }
-    /*stage("commit version update") {
+    stage("commit version update") {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
@@ -100,7 +110,7 @@ pipeline {
           }
         }
       }
-    }*/
+    }
   }
   post {
     always {

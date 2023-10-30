@@ -1,0 +1,8 @@
+version: '5.0.10'
+services:
+  weather_api_app:
+    image: 12851043/weather_api_app:v5.0.10
+    ports:
+     -3080:3000
+  redis:
+    image: redis
