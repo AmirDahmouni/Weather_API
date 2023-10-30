@@ -83,7 +83,8 @@ pipeline {
       steps {
         script {
           echo "deploying docker image to EC2 ..."
-          def shellCmd = " bash ./server-cmds.sh"
+          def docker_img = "${HOST_DOCKER}/${NAME_PROJECT}:5.0.10"
+          def shellCmd = " bash ./server-cmds.sh ${docker_img}"
           //def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
           sshagent(['EC2-server']) {
              sh 'scp server-cmds.sh amazon@192.168.1.74:/home/amazon'

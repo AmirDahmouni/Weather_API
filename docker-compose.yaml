@@ -1,6 +1,6 @@
 version: '3.8'
 services:
   weather_api_app:
-    image: 12851043/weather_api_app:5.0.10
+    image: ${DOCKER_IMAGE}
     ports:
      - 3080:3000
