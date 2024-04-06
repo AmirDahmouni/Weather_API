@@ -93,7 +93,7 @@ pipeline {
         }
       }
     }
-    stage("commit version update +") {
+    stage("commit version update +2") {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
