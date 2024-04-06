@@ -1,6 +1,6 @@
 {
-  "name": "weather_api",
-  "version": "4.0.4",
+  "name": "weather_api_app",
+  "version": "5.0.16",
   "description": "",
   "main": "index.js",
   "engines": {

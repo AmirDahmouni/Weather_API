@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  weather_api_app:
+    image: ${DOCKER_IMAGE}
+    ports:
+     - 3080:3000
