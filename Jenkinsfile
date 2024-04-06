@@ -40,7 +40,7 @@ pipeline {
         }
       }
       steps {
-        echo "running tests ..."
+        echo "Start running tests ..."
       }
     }
     stage("build App") {
