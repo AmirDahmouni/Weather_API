@@ -33,7 +33,7 @@ pipeline {
         }
       }
     }
-    stage("Tests") {
+    stage("Test") {
       when {
         expression {
           params.executeTests == true
