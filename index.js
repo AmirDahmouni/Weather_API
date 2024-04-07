@@ -10,7 +10,7 @@ require('dotenv').config();
 app.enable("trust proxy");
 app.use(cors({ origin: process.env.WEATHER_APP, credentials: true }));
 
-app.use(express.json()); // for parsing application/json we use it as middleware in pipeline return the req.body
+app.use(express.json()); // parsing application/json we use it as middleware in pipeline return the req.body
 app.use(express.urlencoded({ extended: true }))
 
 mongoose.set('strictQuery', true);
