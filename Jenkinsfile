@@ -15,6 +15,7 @@ pipeline {
       NAME_PROJECT = "weather_api_app"
       HOST_DOCKER = "12851043"
       HOST_NEXUS = "localhost:8082"
+      EC2_INSTANCE = "amazon@192.168.1.74"
       TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStatus: true)
   }
   tools {
@@ -54,10 +55,10 @@ pipeline {
           sh 'git config --global user.email "dahmouni_amir@hotmail.fr" '
           sh 'git config --global user.name "AmirDahmouni" '
 
-          NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
+          env.NEXT_VERSION = sh(script: 'npm version patch --no-git-tag-version', returnStdout: true)
           sh 'rm -f weather_api*'
           sh "npm pack"
-          echo "building version ${NEXT_VERSION}"
+          echo "building version ${env.NEXT_VERSION}"
 
 
         }
@@ -74,8 +75,9 @@ pipeline {
       }
       steps {
         script {
-          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:5.0.10")
-          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:5.0.10.tgz")
+          echo "${env.NEXT_VERSION}"
+          buildDocker("${HOST_DOCKER}/${NAME_PROJECT}:${env.NEXT_VERSION}")
+          buildNexus("${HOST_NEXUS}/${NAME_PROJECT}:${env.NEXT_VERSION}.tgz")
         }
       }
     }
@@ -87,8 +89,8 @@ pipeline {
           def shellCmd = " bash ./server-cmds.sh ${docker_img}"
           //def dockerCMD = "docker run -p 3080:3000 -d 12851043/weather_api_app:v5.0.10"
           sshagent(['EC2-server']) {
-             sh 'scp server-cmds.sh amazon@192.168.1.74:/home/amazon'
-             sh "ssh -o StrictHostKeyChecking=no amazon@192.168.1.74 ${shellCmd}"
+             sh "scp server-cmds.sh ${EC2_INSTANCE}:/home/amazon"
+             sh "ssh -o StrictHostKeyChecking=no ${EC2_INSTANCE} ${shellCmd}"
           }
         }
       }
