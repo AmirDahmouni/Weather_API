@@ -9,13 +9,13 @@ ENV DATABASE_MONGOURL=mongodb+srv://mongo:YgD9GS9lvQnBnPiB@cluster1.oj4tccv.mong
   PORT=3000 \
   JWT_SECRET=jwtweather2023
 
-WORKDIR /app
+RUN mkdir -p /home/app
 
-COPY package*.json ./
+COPY ./ ./home/app
+
+WORKDIR /home/app
 
 RUN npm install
-
-COPY . .
 
 EXPOSE 3000
 
