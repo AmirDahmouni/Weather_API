@@ -4,7 +4,7 @@
 def gv
 library identifier :'jenkins-shared-library@master',retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote : 'https://github.com/AmirDahmouni/Weather_API.git',
+   remote : 'https://github.com/AmirDahmouni/jenkins-shared-library.git',
    credentialsId: 'github-credentials'
   ]
 )
@@ -34,14 +34,14 @@ pipeline {
         }
       }
     }
-    stage("Tests") {
+    stage("Test") {
       when {
         expression {
           params.executeTests == true
         }
       }
       steps {
-        echo "running tests ..."
+        echo "Start running tests ..."
       }
     }
     stage("build App") {
@@ -95,7 +95,7 @@ pipeline {
         }
       }
     }
-    stage("commit version update") {
+    stage("commit version update +++") {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
