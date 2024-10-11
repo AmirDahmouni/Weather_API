@@ -81,7 +81,7 @@ pipeline {
         }
       }
     }
-    stage ("Deploy ...") {
+    stage ("Deploy to AWS-EC2 Docker-compose") {
       steps {
         script {
           echo "deploying docker image to EC2 ..."
