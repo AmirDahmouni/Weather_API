@@ -17,6 +17,9 @@ pipeline {
       HOST_NEXUS = "localhost:8082"
       EC2_INSTANCE = "amazon@192.168.1.74"
       TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStatus: true)
+      GIT_REPO = 'https://github.com/AmirDahmouni/online-shop-microservices'
+      GIT_BRANCH = env.GIT_BRANCH
+      HELMFILE_PATH = './'
   }
   tools {
     nodejs 'node'
@@ -31,6 +34,7 @@ pipeline {
       steps {
         script {
           initialize()
+          git url: "${GIT_REPO}"
         }
       }
     }
@@ -81,6 +85,7 @@ pipeline {
         }
       }
     }
+
     stage ("Deploy to AWS-EC2 Docker-compose") {
       steps {
         script {
@@ -95,6 +100,22 @@ pipeline {
         }
       }
     }
+
+    stage ("Deploy to ELK Linode") {
+      steps {
+        script {
+          echo "Deploying Helm charts using Helmfile to Linode cluster..."
+          withCredentials([file(credentialsId: 'lke-credentials', variable: 'KUBECONFIG_FILE')]) {
+                withEnv(["KUBECONFIG=${KUBECONFIG_FILE}"]) {
+                            dir("${HELMFILE_PATH}") {
+                                sh 'helm install helmfile'
+                            }
+                        }
+          }
+        }
+      }
+    }
+
     stage("commit version update +++") {
       steps {
         script {
