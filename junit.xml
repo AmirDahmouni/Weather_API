@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="0.666">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-10-14T09:50:24" time="0.568" tests="3">
+    <testcase classname=" main index.js file exists" name=" main index.js file exists" time="0.003">
+    </testcase>
+    <testcase classname=" Dockerfile exists" name=" Dockerfile exists" time="0.001">
+    </testcase>
+    <testcase classname=" .gitignore file exists" name=" .gitignore file exists" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

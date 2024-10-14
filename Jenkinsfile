@@ -46,6 +46,7 @@ pipeline {
       }
       steps {
         echo "Start running tests ..."
+        sh "npm run test"
       }
     }
     stage("build App") {
