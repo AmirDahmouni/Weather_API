@@ -45,7 +45,7 @@ pipeline {
         }
       }
       steps {
-        echo "Start running tests ..."
+        echo "Start running tests using Jest ..."
         sh "npm run test"
       }
     }
@@ -72,7 +72,7 @@ pipeline {
     }
     stage("Build & Push Image") {
       input {
-        message "Select the deploiement environment "
+        message "Select the deployment environment"
         ok "Done"
         parameters {
           choice(name: 'ENV', choices: ['Dev', 'Staging', 'Production'], description: '')
