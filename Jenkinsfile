@@ -18,7 +18,6 @@ pipeline {
       EC2_INSTANCE = "amazon@192.168.1.74"
       TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStatus: true)
       GIT_REPO = 'https://github.com/AmirDahmouni/online-shop-microservices'
-      GIT_BRANCH = env.GIT_BRANCH
       HELMFILE_PATH = './'
   }
   tools {
