@@ -45,7 +45,7 @@ pipeline {
       }
       steps {
         echo "Start running tests using Jest ..."
-        sh "npm run test"
+        sh "npm install && npm run test"
       }
     }
     stage("build App") {
