@@ -17,7 +17,7 @@ pipeline {
       HOST_NEXUS = "localhost:8082"
       EC2_INSTANCE = "amazon@192.168.1.74"
       TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStatus: true)
-      GIT_REPO = 'https://github.com/AmirDahmouni/online-shop-microservices'
+      GIT_REPO = 'https://github.com/AmirDahmouni/Weather_API'
       HELMFILE_PATH = './'
   }
   tools {
